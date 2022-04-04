@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useReviews from '../hooks/useReviews';
+import Review from '../Review/Review';
 import './Home.css'
 
 const Home = () => {
+    const [reviews, setReviews] = useReviews();
     return (
         <div className="container">
             <h2 className='text-warning'>World Finest laptop</h2>
@@ -36,7 +39,15 @@ const Home = () => {
             </div>
             {/* Review Section  */}
             <div className='mt-5'>
-                <h1>Customer Reviews</h1>
+                <h1>Customer Reviews: {3}</h1>
+                <div className="row row-cols-1 row-cols-md-3 g-4">
+                    {
+                        reviews.map(review => review.id < 4 ? <Review key={review.id} review={review}></Review> : <h1 key={review.id}></h1>)
+                    }
+
+
+                </div>
+                <Link to='/reviews' className=''><button type="button" class="btn btn-primary mb-5">See All Reviews</button></Link>
             </div>
 
         </div >
